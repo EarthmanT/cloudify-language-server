@@ -1,0 +1,8 @@
+tosca_definitions_version: cloudify_dsl_1_5
+
+# This blueprint should raise linting that there is no display_label or type.
+
+inputs:
+
+  input1:
+    description: 'foo'

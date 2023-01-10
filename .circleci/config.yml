@@ -34,20 +34,7 @@ jobs:
           paths:
             - .
 
-  say-hello:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
 workflows:
-
-  say-hello-workflow:
-    jobs:
-      - say-hello
 
   build_test_deploy: # this can be any name you choose
     jobs:
