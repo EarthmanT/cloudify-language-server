@@ -1,0 +1,41 @@
+version: 2.1
+
+orbs:
+  nodejs: circleci/node@5.0.2
+
+checkout:
+  post:
+    - >
+      if [ -n "$CI_PULL_REQUEST" ]; then
+        PR_ID=${CI_PULL_REQUEST##*/}
+        git fetch origin +refs/pull/$PR_ID/merge:
+        git checkout -qf FETCH_HEAD
+      fi
+
+jobs:
+
+  build_and_test: # this can be any name you choose
+    executor: nodejs/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - nodejs/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Install Jest
+          command: npm install jest -–save-dev
+      - run:
+          name: Run tests
+          command: npm test
+      - run:
+          name: Build app
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+workflows:
+
+  build_test_deploy: # this can be any name you choose
+    jobs:
+      - build_and_test
