@@ -21,11 +21,14 @@ jobs:
       - nodejs/install-packages:
           pkg-manager: npm
       - run:
-          command: npm run test
-          name: Run tests
+          name: Install Jest
+          command: npm install jest -–save-dev
       - run:
-          command: npm run build
+          name: Run tests
+          command: npm test
+      - run:
           name: Build app
+          command: npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
