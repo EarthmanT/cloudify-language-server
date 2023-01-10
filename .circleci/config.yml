@@ -21,8 +21,13 @@ jobs:
       - nodejs/install-packages:
           pkg-manager: npm
       - run:
-          name: Install Jest
-          command: npm install jest -–save-dev
+          name: Install Package
+          command: |
+            npm install
+            npm i jest ts-jest babel-jest
+            npm install --save-dev @babel/preset-env
+            npm install --save-dev @babel/preset-env
+            npm install jest -–save-dev
       - run:
           name: Run tests
           command: npm test
