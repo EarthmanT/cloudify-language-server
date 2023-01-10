@@ -30,7 +30,9 @@ jobs:
             npm install jest -–save-dev
       - run:
           name: Run tests
-          command: npm test
+          command: |
+            npm install
+            npm test
       - run:
           name: Build app
           command: npm run build
